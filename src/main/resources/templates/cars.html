@@ -3,20 +3,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>cars</title>
+    <title></title>
 </head>
 <body>
-<form th:method="POST" th:action="@{cars}" th:object="${count}">
-    <input type="text" th:field="*{count}">
-    <br/>
-    <input type="submit" value="Show!">
-</form>
-    <div>
-        <th:block th:each ="car : ${counted}">
-        <p th:text="${car.getModel()}">car</p>
-        <p th:text="${car.getPrice()}">car</p>
-        <p th:text="${car.getSeries()}">car</p>
-        </th:block>
-    </div>
+<!--<form th:method="POST" th:action="/cars">-->
+<!--    <input type="number" name="count" id="count" value="count">-->
+<!--    <br/>-->
+<!--    <input type="submit" value="Show!">-->
+<!--</form>-->
+<div>
+    <th:block th:each="car : ${counted}">
+        <h1 th:text="${car.getModel()}">car</h1>
+        <h1 th:text="${car.getPrice()}">car</h1>
+        <h1 th:text="${car.getSeries()}">car</h1>
+    </th:block>
+</div>
 </body>
 </html>
