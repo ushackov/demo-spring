@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class CarDao {
+public class CarDao{
     private final List<Car> carList;
 
     {
@@ -21,5 +21,9 @@ public class CarDao {
 
     public List<Car> getCarList(int count) {
         return count >= carList.size() ? carList : carList.subList(0, count);
+    }
+
+    public List<Car> getAll() {
+        return carList;
     }
 }
