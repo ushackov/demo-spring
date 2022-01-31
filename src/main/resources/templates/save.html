@@ -8,7 +8,7 @@
 <body>
 <div>
   <h1 th:text="Enter_new_person"></h1>
-  <form th:method="POST" th:action="@{/people/table}" th:object="${person}">
+  <form th:method="POST" th:action="@{/people/new}" th:object="${person}">
     <table>
       <tr>
         <td><label for="name" th:text="Name + ':'"></label></td>

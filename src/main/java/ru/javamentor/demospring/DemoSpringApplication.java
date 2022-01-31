@@ -4,7 +4,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import ru.javamentor.demospring.dao.PeopleRepository;
+import ru.javamentor.demospring.dao.PersonRepository;
 import ru.javamentor.demospring.model.Person;
 
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ public class DemoSpringApplication {
     }
 
     @Bean
-    CommandLineRunner runner(PeopleRepository repository) {
+    CommandLineRunner runner(PersonRepository repository) {
         List<Person> people = new ArrayList<>();
         people.add(new Person("Andrey", "Ushakov", (byte) 33));
         people.add(new Person("Anatoly", "Marandyuk", (byte) 24));

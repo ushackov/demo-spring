@@ -1,15 +1,15 @@
 package ru.javamentor.demospring.service;
 
 import org.springframework.stereotype.*;
-import ru.javamentor.demospring.dao.PeopleRepository;
+import ru.javamentor.demospring.dao.PersonRepository;
 import ru.javamentor.demospring.model.Person;
 
 import java.util.List;
 
 @Service
-public class PeopleService {
-    private final PeopleRepository repository;
-    public PeopleService(PeopleRepository repository){
+public class PersonService {
+    private final PersonRepository repository;
+    public PersonService(PersonRepository repository){
         this.repository = repository;
     }
 

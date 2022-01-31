@@ -6,11 +6,7 @@
     <title></title>
 </head>
 <body>
-<!--<form th:method="POST" th:action="/cars">-->
-<!--    <input type="number" name="count" id="count" value="count">-->
-<!--    <br/>-->
-<!--    <input type="submit" value="Show!">-->
-<!--</form>-->
+
 <div>
     <th:block th:each="car : ${counted}">
         <h1 th:text="${car.getModel()}">car</h1>

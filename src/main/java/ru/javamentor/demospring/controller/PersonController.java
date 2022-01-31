@@ -1,12 +1,10 @@
 package ru.javamentor.demospring.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ru.javamentor.demospring.model.Person;
-import ru.javamentor.demospring.service.PeopleService;
+import ru.javamentor.demospring.service.PersonService;
 
 import java.util.List;
 
@@ -48,12 +46,12 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/people")
-public class PeopleController {
+public class PersonController {
 
-    private final PeopleService peopleService;
+    private final PersonService personService;
 
-    public PeopleController(PeopleService peopleService) {
-        this.peopleService = peopleService;
+    public PersonController(PersonService personService) {
+        this.personService = personService;
     }
 
     @GetMapping("")
@@ -66,10 +64,10 @@ public class PeopleController {
         return new ModelAndView("save");
     }
 
-    @PostMapping(value = "/table")
+    @PostMapping("/new")
     public ModelAndView create(@ModelAttribute("person") Person person){
         if(person.getName() != "" && person.getLastName() != "" && person.getAge() != 0){
-            peopleService.save(person);
+            personService.save(person);
         }
         return new ModelAndView("redirect:table");
     }
@@ -77,21 +75,21 @@ public class PeopleController {
     @GetMapping(value = "/table")
     public ModelAndView showAllUsers(){
         final ModelAndView model = new ModelAndView("table");
-        List<Person> people = peopleService.getAll();
+        List<Person> people = personService.getAll();
         model.addObject("people", people);
         return model;
     }
 
     @GetMapping(value = "/{id}")
-    public ModelAndView showUser(@PathVariable("id") long id, ModelMap model){
+    public ModelAndView showUser(@PathVariable("id") long id){
         final ModelAndView showPerson = new ModelAndView("showPerson");
-        showPerson.addObject("person", peopleService.get(id));
+        showPerson.addObject("person", personService.get(id));
         return showPerson;
     }
 
     @PostMapping(value = "/{id}")
     public ModelAndView deleteUser(@PathVariable("id") long id){
-        peopleService.delete(id);
+        personService.delete(id);
         return new ModelAndView("redirect:table");
     }
 }
