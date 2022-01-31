@@ -1,8 +1,8 @@
 package ru.javamentor.demospring.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import ru.javamentor.demospring.model.User;
+import ru.javamentor.demospring.model.Person;
 
-public interface PeopleRepository extends JpaRepository<User,Long> {
+public interface PeopleRepository extends JpaRepository<Person,Long> {
 
 }

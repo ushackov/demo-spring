@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User</title>
+</head>
+<body>
+<div>
+    <form th:method="POST" th:action="@{/people/table}" th:object="${person}">
+        <input type="hidden" id="id" th:field="*{id}">
+        <table>
+            <tr>
+                <td><label for="name" th:text="Name + ':'">Name:</label></td>
+                <td><input type="text" th:field="*{name}" id="name" th:value="${person.name}"></td>
+            </tr>
+            <tr>
+                <td><label for="lastName" th:text="LastName + ':'">Last_name:</label></td>
+                <td><input type="text" th:field="*{lastName}" id="lastName" th:value="${person.lastName}"></td>
+            </tr>
+            <tr>
+                <td><label for="age" th:text="Age + ':'">Age:</label></td>
+                <td><input type="text" th:field="*{age}" id="age" th:value="${person.age}"></td>
+            </tr>
+        </table>
+        <br/>
+        <input type="submit" th:value="Edit" style="float: left; margin-right: 20px">
+    </form>
+    <form th:method="POST" th:action="@{/people/{id}(id=${person.id})}" th:object="${person}">
+        <input type="submit" th:value="Delete">
+    </form>
+</div>
+</body>
+</html>

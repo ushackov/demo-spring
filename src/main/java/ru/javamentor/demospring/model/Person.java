@@ -4,8 +4,8 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "pre-project")
-public class User implements Serializable {
+@Table(name = "people")
+public class Person implements Serializable {
     private static final long serialVersionUID = -8706689714326132798L;
 
     @Id
@@ -23,11 +23,11 @@ public class User implements Serializable {
     private byte age;
 
     @SuppressWarnings("UnusedDeclaration")
-    public User() {
+    public Person() {
     }
 
     @SuppressWarnings("UnusedDeclaration")
-    public User(long id, String name, String lastName, byte age) {
+    public Person(long id, String name, String lastName, byte age) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
@@ -35,7 +35,7 @@ public class User implements Serializable {
     }
 
     @SuppressWarnings("UnusedDeclaration")
-    public User(String name, String pass, byte age) {
+    public Person(String name, String pass, byte age) {
         this.setId(-1);
         this.name = name;
         this.lastName = pass;
@@ -43,7 +43,7 @@ public class User implements Serializable {
     }
 
     @SuppressWarnings("UnusedDeclaration")
-    public User(String name) {
+    public Person(String name) {
         this.setId(-1);
         this.setName(name);
     }
@@ -56,6 +56,10 @@ public class User implements Serializable {
     @SuppressWarnings("UnusedDeclaration")
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public long getId() {
