@@ -1,51 +1,15 @@
 package ru.javamentor.demospring.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ru.javamentor.demospring.model.Person;
 import ru.javamentor.demospring.service.PersonService;
 
-import java.util.List;
-
-//@Controller
-//@RequestMapping(value = "/people")
-//public class PeopleController {
-//    PeopleService service;
-//
-//    public PeopleController(PeopleService service) {
-//        this.service = service;
-//    }
-//
-//    @GetMapping("/")
-//    public ModelAndView showAll(){
-//        ModelAndView model = new ModelAndView("people");
-//        model.addObject("people", service.getAll());
-//        return model;
-//    }
-//
-//    @GetMapping("/show")
-//    public ModelAndView showUser(@RequestParam("id")long id){
-//        final ModelAndView modelAndView = new ModelAndView("people");
-//        modelAndView.addObject("person", service.get(id));
-//        return modelAndView;
-//    }
-//
-////    @GetMapping("/save")
-////    public ModelAndView save(){
-////        return new ModelAndView("save");
-////    }
-//
-//    @PostMapping("/save")
-//    public ModelAndView edit(@ModelAttribute("form") Person person){
-//        final ModelAndView model = new ModelAndView("save");
-//        return model;
-//    }
-//}
-
-
 @Controller
-@RequestMapping("/people")
 public class PersonController {
 
     private final PersonService personService;
@@ -54,42 +18,19 @@ public class PersonController {
         this.personService = personService;
     }
 
-    @GetMapping("")
-    public String printWelcome(){
-        return "people";
+    @GetMapping(value = "/person")
+    public ModelAndView userInfo(@AuthenticationPrincipal Person person){
+        final ModelAndView showModel = new ModelAndView("show");
+        showModel.addObject("person", personService.findPerson(person.getId()));
+        return showModel;
     }
 
-    @GetMapping("/save")
-    public ModelAndView newUser(@ModelAttribute("person") Person person){
-        return new ModelAndView("save");
-    }
-
-    @PostMapping("/new")
-    public ModelAndView create(@ModelAttribute("person") Person person){
-        if(person.getName() != "" && person.getLastName() != "" && person.getAge() != 0){
-            personService.save(person);
-        }
-        return new ModelAndView("redirect:table");
-    }
-
-    @GetMapping(value = "/table")
-    public ModelAndView showAllUsers(){
-        final ModelAndView model = new ModelAndView("table");
-        List<Person> people = personService.getAll();
-        model.addObject("people", people);
-        return model;
-    }
-
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "/person/{id}")
     public ModelAndView showUser(@PathVariable("id") long id){
-        final ModelAndView showPerson = new ModelAndView("showPerson");
-        showPerson.addObject("person", personService.get(id));
-        return showPerson;
+        final ModelAndView showModelGet = new ModelAndView("show");
+        showModelGet.addObject("person", personService.findPerson(id));
+        return showModelGet;
     }
 
-    @PostMapping(value = "/{id}")
-    public ModelAndView deleteUser(@PathVariable("id") long id){
-        personService.delete(id);
-        return new ModelAndView("redirect:table");
-    }
+
 }

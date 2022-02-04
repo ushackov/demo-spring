@@ -6,8 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import ru.javamentor.demospring.dao.PersonRepository;
 import ru.javamentor.demospring.model.Person;
+import ru.javamentor.demospring.model.Role;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @SpringBootApplication
@@ -22,9 +24,7 @@ public class DemoSpringApplication {
     @Bean
     CommandLineRunner runner(PersonRepository repository) {
         List<Person> people = new ArrayList<>();
-        people.add(new Person("Andrey", "Ushakov", (byte) 33));
-        people.add(new Person("Anatoly", "Marandyuk", (byte) 24));
-        people.add(new Person("Karina", "Ushakova", (byte) 30));
+//        people.add(new Person("a","a",(byte)30, "a", "a",Collections.singleton(new Role("ADMIN"))));
         return __ -> repository.saveAll(people);
     }
 }

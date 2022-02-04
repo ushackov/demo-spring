@@ -3,16 +3,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>Home</title>
 </head>
 <body>
-<div>
-    <th:block th:each="msg : ${messages}">
-        <h1 th:text="${msg}"></h1>
-    </th:block>
+<div style="text-align: left;padding:5px;margin:5px 0px;background:rgba(253,0,224,0.68);">
+    <a href="/logout" th:text="EXIT">Exit</a>
+    <!--    &nbsp;|&nbsp;-->
 </div>
-<div>
-    <a th:href="@{/cars/}" >cars</a>
-</div>
+<h1 th:text="WELCOME"></h1>
+<a href="/login" th:text="SIGN_IN">Join</a>
+<br/>
+<a href="/new" th:text="Registration">Registration</a>
+
+
 </body>
 </html>

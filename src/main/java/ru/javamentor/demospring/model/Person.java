@@ -1,93 +1,157 @@
 package ru.javamentor.demospring.model;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
-import java.io.Serializable;
+import java.util.Collection;
+import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "people")
-public class Person implements Serializable {
-    private static final long serialVersionUID = -8706689714326132798L;
+public class Person implements UserDetails {
 
     @Id
-    @Column
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-    @Column
+    @Column(name = "name")
     private String name;
 
-    @Column
-    private String lastName;
+    @Column(name = "surname")
+    private String surname;
 
-    @Column
-    private byte age;
+    @Column(name = "age")
+    private Byte age;
 
-    @SuppressWarnings("UnusedDeclaration")
-    public Person() {
-    }
+    @Column(name = "username", unique = true)
+    private String username;
 
-    @SuppressWarnings("UnusedDeclaration")
-    public Person(long id, String name, String lastName, byte age) {
-        this.id = id;
+    @Column(name = "password")
+    private String password;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "person_role",
+            joinColumns = @JoinColumn(name = "person_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles;
+
+    public Person(){}
+
+    public Person(String name, String surname, Byte age, String username, String password, Set<Role> roles){
         this.name = name;
-        this.lastName = lastName;
+        this.surname = surname;
         this.age = age;
+        this.username = username;
+        this.password = password;
+        this.roles = roles;
     }
 
-    @SuppressWarnings("UnusedDeclaration")
-    public Person(String name, String pass, byte age) {
-        this.setId(-1);
-        this.name = name;
-        this.lastName = pass;
-        this.age = age;
-    }
-
-    @SuppressWarnings("UnusedDeclaration")
-    public Person(String name) {
-        this.setId(-1);
-        this.setName(name);
-    }
-
-    @SuppressWarnings("UnusedDeclaration")
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    @SuppressWarnings("UnusedDeclaration")
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public long getId() {
+    public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
         return name;
     }
 
-    public String getLastName() {
-        return lastName;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public Byte getAge() {
+        return age;
+    }
+
+    public void setAge(Byte age) {
+        this.age = age;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return roles;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return username;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", name='" + name +
-                ", lastName='" + lastName + '\'' +
-                '}';
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", age=" + age +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +'}';
     }
 
-    public byte getAge() {
-        return age;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Person person = (Person) o;
+        return Objects.equals(username, person.username);
     }
 
-    public void setAge(byte age) {
-        this.age = age;
+    @Override
+    public int hashCode() {
+        return Objects.hash(username);
     }
 }
