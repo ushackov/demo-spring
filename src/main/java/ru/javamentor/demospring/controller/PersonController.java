@@ -1,15 +1,15 @@
 package ru.javamentor.demospring.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import ru.javamentor.demospring.model.Person;
 import ru.javamentor.demospring.service.PersonService;
 
-@Controller
+import java.util.ArrayList;
+import java.util.List;
+
+@RestController
 public class PersonController {
 
     private final PersonService personService;
@@ -18,19 +18,16 @@ public class PersonController {
         this.personService = personService;
     }
 
-    @GetMapping(value = "/person")
-    public ModelAndView userInfo(@AuthenticationPrincipal Person person){
-        final ModelAndView showModel = new ModelAndView("show");
-        showModel.addObject("person", personService.findPerson(person.getId()));
-        return showModel;
+    @GetMapping("persons/all")
+    public List<Person> personsAll(){
+        return personService.allPersons();
     }
 
-    @GetMapping(value = "/person/{id}")
-    public ModelAndView showUser(@PathVariable("id") long id){
-        final ModelAndView showModelGet = new ModelAndView("show");
-        showModelGet.addObject("person", personService.findPerson(id));
-        return showModelGet;
+    @GetMapping("persons/show")
+    public List<Person> personOne(@RequestParam long id){
+        final ArrayList<Person> persons = new ArrayList<>();
+        persons.add(personService.findPerson(id));
+        return persons;
     }
-
 
 }

@@ -1,6 +1,5 @@
 package ru.javamentor.demospring.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.javamentor.demospring.dao.PersonRepository;
@@ -23,7 +22,7 @@ public class PersonService{
     }
 
     @Transactional
-    public List<Person> allUsers() {
+    public List<Person> allPersons() {
         return repository.findAll();
     }
 
@@ -33,7 +32,7 @@ public class PersonService{
     }
 
     @Transactional
-    public void delete(Long id) {
+    public void delete(long id) {
         repository.deleteById(id);
     }
 

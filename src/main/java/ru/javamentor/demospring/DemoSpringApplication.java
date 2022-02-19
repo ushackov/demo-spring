@@ -6,10 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import ru.javamentor.demospring.dao.PersonRepository;
 import ru.javamentor.demospring.model.Person;
-import ru.javamentor.demospring.model.Role;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 @SpringBootApplication
