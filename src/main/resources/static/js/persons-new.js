@@ -1,6 +1,7 @@
 function send() {
 
     let username = $("#username").val();
+    let email = $("#email").val();
     let password = $("#password").val();
     let name = $("#name").val();
     let surname = $("#surname").val();
@@ -8,6 +9,7 @@ function send() {
 
     let person = {
         username: username,
+        email: email,
         password: password,
         name: name,
         surname: surname,
@@ -15,14 +17,13 @@ function send() {
     }
 
     $.ajax({
-        method: 'POST',
+        type: 'POST',
         url: "/",
+        datatype: 'json',
         contentType: "application/json",
         async: false,
         data: JSON.stringify(person),
-        error: function(erorr) {
-            console.log(error)
-        }
     })
+    window.location.replace("/login")
 
 }

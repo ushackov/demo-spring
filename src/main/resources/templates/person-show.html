@@ -21,28 +21,48 @@
         </div>
     </div>
 </header>
-<div class="container-fluid" id="personId" tabindex=${id}>
-    <h1 class="h1">Information-page</h1>
-    <div class="border">
-        <h4 class="h4 py-3 pl-4">About user</h4>
-        <div class="bg-white border px-3 py-3">
-            <table CLASS="table table-striped">
-                <thead class="thead-white">
-                <tr>
-                    <th>ID</th>
-                    <th>Username</th>
-                    <th>Name</th>
-                    <th>Surname</th>
-                    <th>Age</th>
-                    <th>Roles</th>
-                </tr>
-                </thead>
-                <tbody id="userTableBody">
-                </tbody>
-            </table>
+<section>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-2 px-0">
+                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                    <a class="nav-link active" id="v-pills-user-tab" data-bs-toggle="pill" href="#personId" role="tab"
+                       aria-controls="v-pills-user" onclick="renderTable()" aria-selected="false">User</a>
+                </div>
+            </div>
+            <div class="col-10 bg-light vh-100 px-5">
+                <div class="tab-content" id="v-pills-tabContent">
+                    <div class="container-fluid" id="personId" tabindex=${id}>
+                        <h1 class="h1">Information-page</h1>
+                        <div class="border">
+                            <h4 class="h4 py-3 pl-4">About user</h4>
+                            <div class="bg-white border px-3 py-3">
+                                <table CLASS="table table-striped">
+                                    <thead class="thead-white">
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Username</th>
+                                        <th>Email</th>
+                                        <th>Name</th>
+                                        <th>Surname</th>
+                                        <th>Age</th>
+                                        <th>Roles</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="userTableBody">
+                                    </tbody>
+                                </table>
+                                <div id="adminBtn" class="container-fluid">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
+</section>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="/js/person-show.js"></script>

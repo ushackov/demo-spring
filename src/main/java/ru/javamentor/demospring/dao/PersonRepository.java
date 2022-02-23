@@ -5,6 +5,6 @@ import ru.javamentor.demospring.model.Person;
 import ru.javamentor.demospring.model.Role;
 
 public interface PersonRepository extends JpaRepository<Person,Long> {
-Person findByName(String name);
+Person findByUsername(String name);
 Role findRoleById(long id);
 }
